@@ -106,7 +106,8 @@ p { margin: 0; }
   font-family: var(--serif); font-style: italic; font-size: 24px; color: var(--polen);
   border: 1px solid rgba(217, 164, 65, .55); background: rgba(42, 23, 32, .35);
 }
-.marca__sigla--grande { width: 88px; height: 88px; font-size: 40px; border-radius: 22px; }
+.marca__logo { width: 62px; height: auto; border-radius: 12px; }
+.rodape__logo { width: 160px; height: auto; border-radius: 20px; }
 .marca span { font-family: var(--serif); font-style: italic; font-size: 24px; }
 .menu { display: flex; align-items: center; gap: 30px; }
 .menu a:not(.btn) {
@@ -332,7 +333,8 @@ p { margin: 0; }
   body { font-size: 16px; }
   .container, .topo__inner { padding-left: 18px; padding-right: 18px; }
   .marca span { font-size: 20px; }
-  .marca__sigla { width: 42px; height: 42px; font-size: 21px; }
+  .marca__logo { width: 50px; }
+  .rodape__logo { width: 128px; }
   .hero__conteudo { padding-bottom: 24px; }
   .hero__cartao { padding: 28px 24px; border-radius: var(--raio); }
   .acoes .btn { flex: 1 1 100%; }
