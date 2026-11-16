@@ -106,8 +106,8 @@ p { margin: 0; }
   font-family: var(--serif); font-style: italic; font-size: 24px; color: var(--polen);
   border: 1px solid rgba(217, 164, 65, .55); background: rgba(42, 23, 32, .35);
 }
-.marca__logo { width: 62px; height: auto; border-radius: 12px; }
-.rodape__logo { width: 160px; height: auto; border-radius: 20px; }
+.marca__logo { width: 62px; height: auto; }
+.rodape__logo { width: 160px; height: auto; }
 .marca span { font-family: var(--serif); font-style: italic; font-size: 24px; }
 .menu { display: flex; align-items: center; gap: 30px; }
 .menu a:not(.btn) {
