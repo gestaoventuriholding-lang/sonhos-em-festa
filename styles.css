@@ -225,7 +225,7 @@ p { margin: 0; }
 .depoimentos { padding-top: 120px; padding-bottom: 120px; }
 .depoimentos__topo { display: flex; flex-direction: column; gap: 12px; margin-bottom: 44px; }
 .depoimentos h2 { font-size: clamp(36px, 4vw, 56px); line-height: 1.04; }
-.depoimentos__grade { display: grid; grid-template-columns: 1fr 1.25fr 1fr; gap: 18px; align-items: stretch; }
+.depoimentos__grade { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: stretch; }
 .depo {
   margin: 0; padding: 36px 32px; border-radius: var(--raio-lg);
   background: #FFFFFF; border: 1px solid #EDE5E2;
@@ -234,7 +234,6 @@ p { margin: 0; }
 .depo blockquote { font-style: italic; font-size: 22px; line-height: 1.4; }
 .depo figcaption { font-size: 14px; color: var(--texto-3); padding-top: 18px; border-top: 1px solid var(--linha); }
 .depo--destaque { background: var(--noite); color: var(--lirio); border-color: transparent; }
-.depo--destaque blockquote { font-size: 24px; }
 .depo--destaque figcaption { color: #CDBDC3; border-color: rgba(255, 255, 255, .15); }
 
 /* ---------- contato ---------- */
