@@ -94,3 +94,79 @@
   // Ano do rodapé
   document.getElementById('ano').textContent = new Date().getFullYear();
 })();
+
+/* ===== Efeitos elegantes ===== */
+(() => {
+  const calmo = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Título da abertura palavra por palavra (preserva o <em>)
+  const h1 = document.querySelector('.hero h1');
+  if (h1 && !calmo) {
+    let i = 0;
+    const embrulhar = no => {
+      [...no.childNodes].forEach(filho => {
+        if (filho.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          filho.textContent.split(/(\s+)/).forEach(parte => {
+            if (!parte) return;
+            if (/^\s+$/.test(parte)) { frag.appendChild(document.createTextNode(' ')); return; }
+            const p = document.createElement('span'); p.className = 'palavra';
+            const d = document.createElement('span'); d.textContent = parte; d.style.setProperty('--i', i++);
+            p.appendChild(d); frag.appendChild(p);
+          });
+          filho.replaceWith(frag);
+        } else if (filho.nodeType === 1) embrulhar(filho);
+      });
+    };
+    h1.setAttribute('aria-label', h1.textContent.replace(/\s+/g, ' ').trim());
+    embrulhar(h1);
+    requestAnimationFrame(() => requestAnimationFrame(() => h1.classList.add('titulo-pronto')));
+  }
+
+  // Fotos com efeito de cortina
+  const fotos = document.querySelectorAll('.sobre__foto, .servicos__foto, .momentos figure');
+  fotos.forEach(f => {
+    const img = f.querySelector('img'); if (!img) return;
+    const box = document.createElement('div'); box.className = 'foto-cortina';
+    img.replaceWith(box); box.appendChild(img);
+  });
+  const cortinas = document.querySelectorAll('.foto-cortina');
+  if ('IntersectionObserver' in window && !calmo) {
+    const obs = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visivel'); obs.unobserve(e.target); }
+    }), { threshold: 0.2 });
+    cortinas.forEach(c => obs.observe(c));
+  } else cortinas.forEach(c => c.classList.add('visivel'));
+
+  // Rótulos soltos (fora de um bloco .revelar) também desenham o fio
+  document.querySelectorAll('.rotulo').forEach(r => {
+    if (!r.closest('.revelar')) r.classList.add('visivel');
+  });
+
+  if (calmo) return;
+
+  // Barra de progresso + parallax leve
+  const barra = document.getElementById('progresso');
+  const heroFoto = document.querySelector('.hero__foto');
+  const desktop = matchMedia('(min-width: 768px)');
+  let pedido = false;
+  const quadro = () => {
+    pedido = false;
+    const y = scrollY;
+    const max = document.documentElement.scrollHeight - innerHeight;
+    barra.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
+    if (heroFoto && y < innerHeight * 1.2) {
+      heroFoto.style.translate = `0 ${y * (desktop.matches ? 0.3 : 0.15)}px`;
+    }
+    if (desktop.matches) {
+      document.querySelectorAll('.servicos__foto .foto-cortina, .sobre__foto .foto-cortina').forEach(el => {
+        const r = el.getBoundingClientRect();
+        const centro = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
+        el.style.translate = `0 ${centro * -30}px`;
+      });
+    }
+  };
+  addEventListener('scroll', () => { if (!pedido) { pedido = true; requestAnimationFrame(quadro); } }, { passive: true });
+  addEventListener('resize', quadro);
+  quadro();
+})();

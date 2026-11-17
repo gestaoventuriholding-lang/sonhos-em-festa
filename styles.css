@@ -429,3 +429,111 @@ p { margin: 0; }
   .numeros { gap: 36px; }
   .numeros dd { font-size: 48px; }
 }
+
+/* =========================================================
+   Efeitos elegantes
+   ========================================================= */
+
+/* barra de progresso dourada no topo */
+.progresso {
+  position: fixed; top: 0; left: 0; z-index: 60; height: 2px; width: 100%;
+  background: linear-gradient(90deg, var(--polen), #F3D48C);
+  transform-origin: 0 50%; transform: scaleX(0);
+}
+
+/* topo encolhe ao rolar */
+.topo__inner { transition: padding .4s ease; }
+.marca__logo { transition: width .4s ease; }
+.topo.rolou .topo__inner { padding-top: 8px; padding-bottom: 8px; }
+.topo.rolou .marca__logo { width: 50px; }
+
+/* título da abertura entra palavra por palavra */
+.palavra { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: .08em; margin-bottom: -.08em; }
+.palavra > span {
+  display: inline-block; transform: translateY(105%); opacity: 0;
+  transition: transform 1.1s cubic-bezier(.19, 1, .22, 1), opacity 1.1s ease;
+  transition-delay: calc(var(--i) * 70ms + 250ms);
+}
+.titulo-pronto .palavra > span { transform: none; opacity: 1; }
+.hero__cartao { transition: opacity 1.2s ease, transform 1.2s cubic-bezier(.19, 1, .22, 1); }
+.hero__cartao:not(.visivel) { transform: translateY(40px) scale(.98); }
+
+/* fotos se revelam como uma cortina subindo */
+.foto-cortina { overflow: hidden; border-radius: var(--raio-lg); }
+.foto-cortina img {
+  clip-path: inset(100% 0 0 0 round var(--raio-lg));
+  transform: scale(1.12);
+  transition: clip-path 1.4s cubic-bezier(.77, 0, .175, 1), transform 1.8s cubic-bezier(.19, 1, .22, 1);
+}
+.foto-cortina.visivel img { clip-path: inset(0 0 0 0 round var(--raio-lg)); transform: scale(1); }
+
+/* fio dourado que se desenha antes dos rótulos */
+.rotulo { display: inline-flex; align-items: center; gap: 12px; }
+.rotulo::before {
+  content: ""; width: 34px; height: 1px; background: currentColor;
+  transform: scaleX(0); transform-origin: left; transition: transform 1s cubic-bezier(.19, 1, .22, 1) .2s;
+}
+.visivel .rotulo::before, .rotulo.visivel::before, .hero .rotulo::before { transform: scaleX(1); }
+.celebrante .rotulo { justify-content: center; }
+
+/* brilho que atravessa os botões */
+.btn { position: relative; overflow: hidden; isolation: isolate; }
+.btn::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, .45) 50%, transparent 70%);
+  transform: translateX(-120%); transition: transform .9s ease;
+}
+.btn:hover::after { transform: translateX(120%); }
+.btn--polen { animation: brilho 6s ease-in-out 3s infinite; }
+@keyframes brilho {
+  0%, 85%, 100% { box-shadow: 0 10px 30px -12px rgba(217, 164, 65, .8); }
+  92% { box-shadow: 0 10px 40px -6px rgba(217, 164, 65, 1); }
+}
+
+/* cartões de serviço: borda dourada surge no hover */
+.card { position: relative; }
+.card::before {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px; pointer-events: none;
+  background: linear-gradient(135deg, var(--polen), transparent 60%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  opacity: 0; transition: opacity .4s ease;
+}
+.card:hover::before { opacity: 1; }
+.card h3 { transition: color .3s ease; }
+.card:hover h3 { color: #8A5A1E; }
+
+/* galeria: zoom suave e legenda que sobe */
+.momentos figure { cursor: default; }
+.momentos .foto-cortina img { transition: clip-path 1.4s cubic-bezier(.77, 0, .175, 1), transform 1.2s cubic-bezier(.19, 1, .22, 1); }
+.momentos figure:hover .foto-cortina.visivel img { transform: scale(1.05); }
+
+/* depoimentos: aspas grandes decorativas */
+.depo { position: relative; overflow: hidden; }
+.depo::before {
+  content: "“"; position: absolute; top: -28px; right: 18px;
+  font-family: var(--serif); font-size: 180px; line-height: 1; color: var(--polen); opacity: .18;
+}
+.depo { transition: transform .5s cubic-bezier(.19, 1, .22, 1), box-shadow .5s ease; }
+.depo:hover { transform: translateY(-6px); box-shadow: var(--sombra); }
+
+/* perguntas: resposta abre suavemente */
+.faq__item p { animation: abrir .5s ease; }
+@keyframes abrir { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+
+/* WhatsApp flutuante: pulso discreto */
+.whats-flutuante::before {
+  content: ""; position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--polen);
+  animation: pulso 2.8s ease-out infinite;
+}
+@keyframes pulso { from { transform: scale(1); opacity: .7; } to { transform: scale(1.6); opacity: 0; } }
+
+/* parallax (só onde há movimento permitido) */
+.paralaxe { will-change: transform; }
+
+@media (prefers-reduced-motion: reduce) {
+  .palavra > span, .foto-cortina img, .hero__cartao { transition: none !important; transform: none !important; opacity: 1 !important; clip-path: none !important; }
+  .btn--polen, .whats-flutuante::before { animation: none; }
+  .progresso { display: none; }
+}
+.servicos__foto .foto-cortina { height: 100%; }
