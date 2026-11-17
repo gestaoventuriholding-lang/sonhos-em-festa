@@ -14,6 +14,7 @@
   --serif: 'Cormorant Garamond', Garamond, Georgia, serif;
   --sans: 'Schibsted Grotesk', 'Helvetica Neue', Arial, sans-serif;
 
+  --secao: clamp(56px, 7vw, 88px);
   --raio: 24px;
   --raio-lg: 32px;
   --largura: 1200px;
@@ -154,8 +155,8 @@ p { margin: 0; }
 
 /* ---------- sobre ---------- */
 .sobre {
-  padding-top: 128px; padding-bottom: 128px;
-  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 80px; align-items: center;
+  padding-top: var(--secao); padding-bottom: var(--secao);
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 64px; align-items: center;
 }
 .sobre__foto { margin: 0; position: relative; }
 .sobre__foto img {
@@ -180,11 +181,11 @@ p { margin: 0; }
 .numeros dd em { font-size: .55em; }
 
 /* ---------- serviços ---------- */
-.servicos { background: #FFFFFF; padding: 128px 0; }
+.servicos { background: #FFFFFF; padding: var(--secao) 0; }
 .servicos__grade {
-  display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 72px; align-items: stretch;
+  display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 56px; align-items: stretch;
 }
-.servicos__lista { display: flex; flex-direction: column; gap: 44px; }
+.servicos__lista { display: flex; flex-direction: column; gap: 32px; }
 .servicos h2 { font-size: clamp(36px, 3.8vw, 54px); line-height: 1.05; margin-top: 12px; max-width: 620px; }
 .cards {
   list-style: none; margin: 0; padding: 0;
@@ -204,7 +205,7 @@ p { margin: 0; }
 .servicos__foto img { width: 100%; height: 100%; min-height: 440px; object-fit: cover; border-radius: var(--raio-lg); }
 
 /* ---------- celebrante ---------- */
-.celebrante { background: var(--noite); color: var(--lirio); padding: 136px 0; }
+.celebrante { background: var(--noite); color: var(--lirio); padding: var(--secao) 0; }
 .celebrante__inner {
   max-width: 880px; display: flex; flex-direction: column; align-items: center; gap: 24px; text-align: center;
 }
@@ -212,19 +213,19 @@ p { margin: 0; }
 .celebrante p:not(.rotulo) { font-size: 18px; color: #D8CBCF; max-width: 640px; }
 
 /* ---------- momentos ---------- */
-.momentos { padding-top: 128px; }
-.momentos__topo { display: flex; flex-direction: column; gap: 12px; margin-bottom: 44px; }
+.momentos { padding-top: var(--secao); }
+.momentos__topo { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
 .momentos h2 { font-size: clamp(36px, 4vw, 56px); line-height: 1.04; }
 .momentos__grade { display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 18px; align-items: end; }
 .momentos figure { margin: 0; display: flex; flex-direction: column; gap: 10px; }
-.momentos figure:nth-child(2) { transform: translateY(-48px); }
+.momentos figure:nth-child(2) { transform: translateY(-28px); }
 .momentos figure.revelar:nth-child(2):not(.visivel) { transform: translateY(-20px); }
 .momentos img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: var(--raio-lg); }
 .momentos figcaption { font-size: 14px; color: var(--texto-3); }
 
 /* ---------- depoimentos ---------- */
-.depoimentos { padding-top: 120px; padding-bottom: 120px; }
-.depoimentos__topo { display: flex; flex-direction: column; gap: 12px; margin-bottom: 44px; }
+.depoimentos { padding-top: var(--secao); padding-bottom: var(--secao); }
+.depoimentos__topo { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
 .depoimentos h2 { font-size: clamp(36px, 4vw, 56px); line-height: 1.04; }
 .depoimentos__grade { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: stretch; }
 .depo {
@@ -239,7 +240,7 @@ p { margin: 0; }
 
 /* ---------- dúvidas ---------- */
 .faq {
-  padding-top: 40px; padding-bottom: 128px;
+  padding-top: 0; padding-bottom: var(--secao);
   display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 72px; align-items: start;
 }
 .faq__topo { display: flex; flex-direction: column; gap: 14px; position: sticky; top: 110px; }
@@ -274,7 +275,7 @@ p { margin: 0; }
 .faq__item p { padding: 0 26px 24px; color: var(--texto-2); max-width: 640px; }
 
 /* ---------- contato ---------- */
-.contato { position: relative; color: var(--lirio); padding: 128px 0; overflow: hidden; }
+.contato { position: relative; color: var(--lirio); padding: var(--secao) 0; overflow: hidden; }
 .contato__fundo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .contato__veu { position: absolute; inset: 0; background: rgba(42, 23, 32, .78); }
 .contato__grade {
@@ -355,7 +356,7 @@ p { margin: 0; }
 }
 
 @media (max-width: 960px) {
-  .sobre, .servicos__grade, .contato__grade { grid-template-columns: 1fr; gap: 48px; }
+  .sobre, .servicos__grade, .contato__grade { grid-template-columns: 1fr; gap: 32px; }
   .sobre__foto { max-width: 460px; }
   .depoimentos__grade { grid-template-columns: 1fr; }
   .faq { grid-template-columns: 1fr; gap: 32px; }
@@ -412,15 +413,10 @@ p { margin: 0; }
   .hero__texto { font-size: 14.5px; line-height: 1.5; }
   .acoes { gap: 8px; margin-top: 4px; }
   .acoes .btn { flex: 1 1 0; min-height: 46px; padding: 0 12px; font-size: 14px; white-space: nowrap; }
-  .sobre, .depoimentos { padding-top: 88px; padding-bottom: 88px; }
   .sobre__foto::after { inset: 12px -12px -12px 12px; }
-  .servicos, .contato { padding: 88px 0; }
-  .celebrante { padding: 96px 0; }
   .cards { grid-template-columns: 1fr; }
-  .faq { padding-bottom: 88px; }
   .faq__item summary { font-size: 20px; padding: 18px 18px; }
   .faq__item p { padding: 0 18px 20px; }
-  .momentos { padding-top: 88px; }
   .momentos__grade { grid-template-columns: 1fr 1fr; }
   .momentos figure:nth-child(2) { transform: none; }
   .momentos figure:nth-child(3) { grid-column: 1 / -1; }
