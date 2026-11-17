@@ -237,6 +237,42 @@ p { margin: 0; }
 .depo--destaque { background: var(--noite); color: var(--lirio); border-color: transparent; }
 .depo--destaque figcaption { color: #CDBDC3; border-color: rgba(255, 255, 255, .15); }
 
+/* ---------- dúvidas ---------- */
+.faq {
+  padding-top: 40px; padding-bottom: 128px;
+  display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 72px; align-items: start;
+}
+.faq__topo { display: flex; flex-direction: column; gap: 14px; position: sticky; top: 110px; }
+.faq h2 { font-size: clamp(36px, 4vw, 56px); line-height: 1.04; }
+.faq__topo > p:not(.rotulo) { color: var(--texto-2); }
+.faq__topo a { font-weight: 600; }
+.faq__lista { display: flex; flex-direction: column; gap: 10px; }
+.faq__item {
+  background: #FFFFFF; border: 1px solid #EDE5E2; border-radius: var(--raio);
+  transition: box-shadow .3s ease, border-color .3s ease;
+}
+.faq__item[open] { box-shadow: var(--sombra); border-color: transparent; }
+.faq__item summary {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  padding: 22px 26px; min-height: 44px;
+  font-family: var(--serif); font-size: 23px; font-weight: 500; line-height: 1.25;
+}
+.faq__item summary::-webkit-details-marker { display: none; }
+.faq__item summary:focus-visible { outline: 3px solid var(--polen); outline-offset: 2px; border-radius: var(--raio); }
+.faq__icone {
+  flex: none; width: 34px; height: 34px; border-radius: 50%;
+  border: 1px solid var(--linha); position: relative; transition: transform .3s ease, background-color .3s ease;
+}
+.faq__icone::before, .faq__icone::after {
+  content: ""; position: absolute; left: 50%; top: 50%; width: 12px; height: 1.5px;
+  background: var(--noite); transform: translate(-50%, -50%);
+}
+.faq__icone::after { transform: translate(-50%, -50%) rotate(90deg); transition: opacity .3s ease; }
+.faq__item[open] .faq__icone { background: var(--polen); border-color: var(--polen); transform: rotate(180deg); }
+.faq__item[open] .faq__icone::after { opacity: 0; }
+.faq__item p { padding: 0 26px 24px; color: var(--texto-2); max-width: 640px; }
+
 /* ---------- contato ---------- */
 .contato { position: relative; color: var(--lirio); padding: 128px 0; overflow: hidden; }
 .contato__fundo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -322,6 +358,8 @@ p { margin: 0; }
   .sobre, .servicos__grade, .contato__grade { grid-template-columns: 1fr; gap: 48px; }
   .sobre__foto { max-width: 460px; }
   .depoimentos__grade { grid-template-columns: 1fr; }
+  .faq { grid-template-columns: 1fr; gap: 32px; }
+  .faq__topo { position: static; }
   .servicos__foto { order: -1; }
   .servicos__foto img { min-height: 320px; max-height: 420px; }
 }
@@ -379,6 +417,9 @@ p { margin: 0; }
   .servicos, .contato { padding: 88px 0; }
   .celebrante { padding: 96px 0; }
   .cards { grid-template-columns: 1fr; }
+  .faq { padding-bottom: 88px; }
+  .faq__item summary { font-size: 20px; padding: 18px 18px; }
+  .faq__item p { padding: 0 18px 20px; }
   .momentos { padding-top: 88px; }
   .momentos__grade { grid-template-columns: 1fr 1fr; }
   .momentos figure:nth-child(2) { transform: none; }
